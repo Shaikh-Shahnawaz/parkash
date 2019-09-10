@@ -1,1 +1,1 @@
-# parkash this simple desktop assitant like friday
+# parkash this simple desktop assitant😎
