@@ -5,17 +5,24 @@ import wikipedia
 import webbrowser
 import os
 import smtplib
-import json
+from pygame import mixer
 import requests
-from tkinter import *
-from PIL import  ImageTk, Image
 from random import randint
+import tkinter as tk
+from tkinter import ttk
+from tkinter import *
 
+
+AZLL=[]
+
+def sdwqdkf(i):
+    print(AZLL)
+    AZLL.append(i)
+    return AZLL[-1]
 
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-# print(voices)
 engine.setProperty('voice', voices[1].id)
 
 
@@ -23,8 +30,14 @@ def speak(Audio):
     engine.say(Audio)
     engine.runAndWait()
 
+def textrere(a):
+    return a
 
-def wishme(events):
+def liat(i):
+    return AZLL.append(i)
+
+
+def wishme():
     hour = int(datetime.datetime.now().hour)
     if hour >= 0 and hour <= 6:
         speak('good night saad')
@@ -35,35 +48,6 @@ def wishme(events):
     elif hour >= 15:
         speak('good evening saad')
 
-
-def takecommand():
-    r = sr.Recognizer()
-    with sr.Microphone() as Source:
-        # print('listeing...!')
-        r.pause_threshold = 1
-        audio = r.listen(Source)
-
-    try:
-        # print('recognizing...')
-        query = r.recognize_google(audio, language='en-in')
-        # print(f"user say:{query}")
-        # speak(query)
-    except Exception as e:
-        # print(e)
-        speak("I can't understand ")
-        return 'none'
-    return query
-
-def news():
-    url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=efa0ddd8997f417fa23a08f8ee62633b"
-    news = requests.get(url).text
-
-    # print(news["articles"])
-    # head = news["articles"]
-    for i in range(0, 5):
-        if i < 4:
-            speak(news["articles"][i]["title"])
-            # print(news["articles"][i]["title"])
 
 
 def sendemail(to, content):
@@ -96,28 +80,129 @@ def rolldices():
         # print("you get six")
         speak("you get six")
 
-def hello(event):
-    while True:
-        query = takecommand().lower()
-        # every logic possiable
+
+
+def callback(url):
+    webbrowser.open_new(url)
+
+
+if __name__ == '__main__':
+
+    root = Tk()
+
+
+    # def hello():
+    #     query = takecommand().lower()
+    #     print(query)
+    #     # every logic possiable
+    #     if 'wikipedia' in query:
+    #         # print('searching on wikipedia...')
+    #         speak('searching on wikipedia...')
+    #         query = query.replace('wikipedia', '')
+    #         result = wikipedia.summary(query, sentences=2)
+    #         # print(result)
+    #         speak(result)
+    #     elif 'who created you' in query:
+    #         speak('i am created by developer name saad chaudhary')
+    #
+    #     elif 'who are you' in query:
+    #         speak('I am parkash')
+    #
+    #     elif 'what is your goal' in query:
+    #         speak('My goal is to take world in next level of automation')
+    #     elif 'open youtube' in query:
+    #         webbrowser.open('youtube.com')
+    #
+    #     elif 'open google' in query:
+    #         webbrowser.open('google.com')
+    #
+    #     elif 'play music' in query:
+    #         music_dir = 'E:\\soong'
+    #         song = os.listdir(music_dir)
+    #         # print(song)
+    #         os.startfile(os.path.join(music_dir, song[0]))
+    #     elif 'open sublime' in query:
+    #         code = "C:\\Program Files\\Sublime Text 3\\sublime_text.exe"
+    #         os.startfile(code)
+    #     elif 'tell time' in query:
+    #         time = datetime.datetime.now().strftime("%H:%M:%S")
+    #         speak(f"sir ,Its {time}")
+    #     elif 'roll a dice' in query:
+    #         rolldices()
+    #     elif 'send email' in query:
+    #         try:
+    #             speak('what should i write')
+    #             content = takecommand()
+    #             to = 'saadchaudhary646@gmail.com'
+    #             sendemail(to, content)
+    #             speak('sir email has been send')
+    #         except Exception as e:
+    #             # print(e)
+    #             speak('sir! i am NOT  able to access')
+
+    def btnClickFunction():
+        nl = '\n'
+        picture_file.insert('end',f' {nl} {AZLL[-1]}')
+
+
+    # This is the section of code which creates the main window
+    root.geometry('520x380')
+    root.configure(background='#2e354f')
+    root.title('Hello, I\'m the main window')
+
+
+    # First, we create a canvas to put the picture on
+
+    worthAThousandWords= tk.Frame(root,height=250, width=250)
+    picture_file =Text(worthAThousandWords,height=15,width=30)
+    picture_file.pack(fill=BOTH, side=LEFT, expand=True)
+    # picture_file.insert('end', textrere())
+    picture_file.focus_set()
+
+
+    worthAThousandWords.place(x=25, y=82)
+
+
+    def buttonClick():
+
+        r = sr.Recognizer()
+        with sr.Microphone() as Source:
+            print('listeing...!')
+            r.pause_threshold = 0.7
+            r.energy_threshold = 400
+            audio = r.listen(Source)
+
+        try:
+            print('recognizing...')
+            query = r.recognize_google(audio, language='en-in')
+            print(f"user say:{query}")
+            speak(query)
+        except Exception as e:
+            print(e)
+            speak("I can't understand ")
+            return 'none'
+
+        query.lower()
         if 'wikipedia' in query:
-            # print('searching on wikipedia...')
+            print('ajksnfjnfwfweofwjo')
             speak('searching on wikipedia...')
             query = query.replace('wikipedia', '')
             result = wikipedia.summary(query, sentences=2)
             # print(result)
             speak(result)
+            # liat(result)
+
         elif 'who created you' in query:
             speak('i am created by developer name saad chaudhary')
+            liat('i am created by developer name saad chaudhary')
+
 
         elif 'who are you' in query:
             speak('I am parkash')
+            # btnClickFunction()
 
         elif 'what is your goal' in query:
             speak('My goal is to take world in next level of automation')
-        elif "news " in query:
-            news()
-
         elif 'open youtube' in query:
             webbrowser.open('youtube.com')
 
@@ -132,7 +217,7 @@ def hello(event):
         elif 'open sublime' in query:
             code = "C:\\Program Files\\Sublime Text 3\\sublime_text.exe"
             os.startfile(code)
-        elif 'tell time' in query:
+        elif 'show time' in query:
             time = datetime.datetime.now().strftime("%H:%M:%S")
             speak(f"sir ,Its {time}")
         elif 'roll a dice' in query:
@@ -148,138 +233,41 @@ def hello(event):
                 # print(e)
                 speak('sir! i am NOT  able to access')
 
-# if __name__=="__main__":
-#     # wishme()
-#     # speak('arfaan mera babu hai lalalalalalal')
-#     while True:
-#         query = takecommand().lower()
-#         # every logic possiable
-#         if 'wikipedia' in query:
-#             print('searching on wikipedia...')
-#             speak('searching on wikipedia...')
-#             query = query.replace('wikipedia', '')
-#             result = wikipedia.summary(query, sentences=2)
-#             print(result)
-#             speak(result)
-#         elif 'who created you' in query:
-#             speak('i am created by developer name saad chaudhary')
-# 
-#         elif 'who are you' in query:
-#             speak('I am parkash')
-# 
-#         elif 'what is your goal' in query:
-#             speak('My goal is to take world in next level of automation')
-#         elif "news " in query:
-#             news()
-# 
-#         elif 'open youtube' in query:
-#             webbrowser.open('youtube.com')
-# 
-#         elif 'open google' in query:
-#             webbrowser.open('google.com')
-# 
-#         elif 'play music' in query:
-#             music_dir = 'E:\\soong'
-#             song = os.listdir(music_dir)
-#             print(song)
-#             os.startfile(os.path.join(music_dir, song[0]))
-#         elif 'open sublime' in query:
-#             code = "C:\\Program Files\\Sublime Text 3\\sublime_text.exe"
-#             os.startfile(code)
-#         elif 'tell time' in query:
-#             time = datetime.datetime.now().strftime("%H:%M:%S")
-#             speak(f"sir ,Its {time}")
-#         elif 'roll a dice' in query:
-#             rolldices()
-#         elif 'send email' in query:
-#             try:
-#                 speak('what should i write')
-#                 content = takecommand()
-#                 to = 'saadchaudhary646@gmail.com'
-#                 sendemail(to, content)
-#                 speak('sir email has been send')
-#             except Exception as e:
-#                 print(e)
-#                 speak('sir! i am NOT  able to access')
-#
-def every_100(text):
-    final_text = ""
-    for i in range(0, len(text)):
-        final_text +=text[i]
-        if i%100==0 and i!=0:
-            final_text += "\n"
-    return final_text
-
-# photo=PhotoImage(file=r"E:\parkash\kk.gif")
-root = Tk()
-
-root.title("Parkash")
-root.geometry("800x500")
-texts = []
-photos = []
-for i in range(0, 1):
-    with open(f"{i+1}.txt") as f:
-        text = f.read()
-        texts.append(every_100(text))
-
-    image = Image.open(f"{i+1}.gif")
-    #TODO: Resize these images
-    image = image.resize((225, 265), Image.ANTIALIAS)
-    photos.append(ImageTk   .PhotoImage(image))
-
-def quuit(event):
-    root.quit()
-f0 = Frame(root, width=800, height=70)
-Label(f0, text="Parkash ", font="lucida 33 bold").pack()
-# Label(f0, text="January 19, 2050", font="lucida 13 bold").pack()
-f0.pack()
-
-l=Label(root,text="Click on button to interact with parkash",bg="orange",width=800,font="lucida 13 bold")
-l.pack(fill="both")
-
-f1 = Frame(root, width=900, height=200)
-Label(f1, text=texts[0], padx=22, pady=22).pack(side="left")
-Label(f1, image=photos[0]).pack()
-f1.pack(fill='both')
-
-
-# menu = Menu(root)
-# root.config(menu=menu)
-# filemenu = Menu(menu)
-# menu.add_cascade(label="File", menu=filemenu)
-# filemenu.add_command(label="New")
-# filemenu.add_command(label="Open...")
-# filemenu.add_separator()
-# filemenu.add_command(label="Exit", command=root.quit)
-#
-# helpmenu = Menu(menu)
-# menu.add_cascade(label="Help", menu=helpmenu)
-# helpmenu.add_command(label="About...")
 
 
 
-back = Frame(root,bg='black')
-back.pack(fill="both")
+    MyButton6 = Button(root, command=buttonClick, bd=0, activebackground='#c1bfbf', overrelief='groove')
 
-l=Label(back,text="Intract with parkash ",bg="orange")
-l.pack(fill="both")
-
-w = Button(back,text="Start",padx=50)
-w.bind("<Button-1>",hello)
-w.pack()
-
-b= Button(back,text="Greet",padx=50)
-b.bind("<Button-1>",wishme)
-b.pack()
-
-ll= Button(back,text="Close",padx=50)
-ll.bind("<Button-1>",quuit)
-ll.pack()
+    MyButton6.pack()
+    # This is the section of code which creates the a label
+    Label(root, text='Hello how may i help you ??',fg='#f0593a', bg='#2e354f', font=('arial', 30, 'normal')).place(x=10, y=22)
 
 
-footer=Label(root,text="Develop by saad chaudhary.",bd=1,relief=SUNKEN,anchor="w",font="lucida 13 bold")
-footer.pack(side=BOTTOM,fill=X)
+    # This is the section of code which creates a button
+    w=Button(root, text='Button mic!', bg='#f0593a', font=('arial', 20, 'normal'),command=btnClickFunction)
+    # w.bind("<Button-1>",hello)
+
+    w.place(x=305, y=262)
+
+
+    # This is the section of code which creates a text input box
+    tInputss=Entry(root)
+    tInputss.place(x=325, y=92)
+
+    # This is the section of code which creates a footer bar
+    footer = tk.Frame(root, bg='#f0593a', height=30)
+    link1 = Label(footer, text="design and develop by chaudhary saad ,mirza arham", fg="black",bg='#f0593a', cursor="hand2",)
+    link1.pack()
+    link1.bind("<Button-1>", lambda e: callback("https://hyperdec.com/"))
+    footer.pack(fill='both',side='bottom')
 
 
 
-root.mainloop()
+    root.mainloop()
+
+
+
+
+
+
+
