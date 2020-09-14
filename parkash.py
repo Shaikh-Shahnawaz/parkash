@@ -90,56 +90,6 @@ if __name__ == '__main__':
 
     root = Tk()
 
-
-    # def hello():
-    #     query = takecommand().lower()
-    #     print(query)
-    #     # every logic possiable
-    #     if 'wikipedia' in query:
-    #         # print('searching on wikipedia...')
-    #         speak('searching on wikipedia...')
-    #         query = query.replace('wikipedia', '')
-    #         result = wikipedia.summary(query, sentences=2)
-    #         # print(result)
-    #         speak(result)
-    #     elif 'who created you' in query:
-    #         speak('i am created by developer name saad chaudhary')
-    #
-    #     elif 'who are you' in query:
-    #         speak('I am parkash')
-    #
-    #     elif 'what is your goal' in query:
-    #         speak('My goal is to take world in next level of automation')
-    #     elif 'open youtube' in query:
-    #         webbrowser.open('youtube.com')
-    #
-    #     elif 'open google' in query:
-    #         webbrowser.open('google.com')
-    #
-    #     elif 'play music' in query:
-    #         music_dir = 'E:\\soong'
-    #         song = os.listdir(music_dir)
-    #         # print(song)
-    #         os.startfile(os.path.join(music_dir, song[0]))
-    #     elif 'open sublime' in query:
-    #         code = "C:\\Program Files\\Sublime Text 3\\sublime_text.exe"
-    #         os.startfile(code)
-    #     elif 'tell time' in query:
-    #         time = datetime.datetime.now().strftime("%H:%M:%S")
-    #         speak(f"sir ,Its {time}")
-    #     elif 'roll a dice' in query:
-    #         rolldices()
-    #     elif 'send email' in query:
-    #         try:
-    #             speak('what should i write')
-    #             content = takecommand()
-    #             to = 'saadchaudhary646@gmail.com'
-    #             sendemail(to, content)
-    #             speak('sir email has been send')
-    #         except Exception as e:
-    #             # print(e)
-    #             speak('sir! i am NOT  able to access')
-
     def btnClickFunction():
         nl = '\n'
         picture_file.insert('end',f' {nl} {AZLL[-1]}')
