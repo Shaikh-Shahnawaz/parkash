@@ -85,6 +85,7 @@ def rolldices():
 def callback(url):
     webbrowser.open_new(url)
 
+# The main function start here
 
 if __name__ == '__main__':
 
